@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>5 ශ්‍රේණියේ බුද්ධි ප්‍රශ්නාවලිය</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala:wght@400;600;700;800&family=Baloo+2:wght@600;700;800&display=swap');
+
+  :root{
+    --sun: #FFC93C;
+    --sky: #33C6E8;
+    --leaf: #4CD070;
+    --berry: #FF5D8F;
+    --grape: #8B5CF6;
+    --ink: #2B2540;
+    --cream: #FFF8EC;
+    --card: #FFFFFF;
+    --shadow: rgba(43,37,64,0.18);
+  }
+
+  *{box-sizing:border-box;}
+
+  body{
+    margin:0;
+    min-height:100vh;
+    font-family:'Noto Sans Sinhala','Baloo 2',sans-serif;
+    background:
+      radial-gradient(circle at 10% 15%, #FFE9A8 0%, transparent 40%),
+      radial-gradient(circle at 90% 10%, #B7F0FF 0%, transparent 45%),
+      radial-gradient(circle at 85% 85%, #FFD3E4 0%, transparent 45%),
+      linear-gradient(160deg, var(--cream), #FDEFD9 60%, #FFE3EE 100%);
+    color:var(--ink);
+    overflow-x:hidden;
+    padding:24px 14px 60px;
+    position:relative;
+  }
+
+  /* floating background shapes */
+  .bg-shape{
+    position:fixed;
+    border-radius:50%;
+    opacity:.5;
+    filter:blur(1px);
+    z-index:0;
+    animation:float 7s ease-in-out infinite;
+  }
+  .bg-shape.s1{width:70px;height:70px;background:var(--sun);top:8%;left:6%;animation-duration:6s;}
+  .bg-shape.s2{width:40px;height:40px;background:var(--berry);top:20%;right:10%;animation-duration:8s;}
+  .bg-shape.s3{width:55px;height:55px;background:var(--sky);bottom:12%;left:8%;animation-duration:7.5s;}
+  .bg-shape.s4{width:30px;height:30px;background:var(--leaf);bottom:20%;right:14%;animation-duration:5.5s;}
+  .bg-shape.s5{width:24px;height:24px;background:var(--grape);top:45%;left:3%;animation-duration:6.5s;}
+  @keyframes float{
+    0%,100%{transform:translateY(0) rotate(0deg);}
+    50%{transform:translateY(-22px) rotate(15deg);}
+  }
+
+  .wrap{
+    max-width:760px;
+    margin:0 auto;
+    position:relative;
+    z-index:1;
+  }
+
+  header{
+    text-align:center;
+    margin-bottom:22px;
+    animation:dropIn .7s cubic-bezier(.34,1.56,.64,1);
+  }
+  header .badge{
+    display:inline-block;
+    background:var(--berry);
+    color:#fff;
+    font-weight:700;
+    font-size:13px;
+    padding:6px 16px;
+    border-radius:20px;
+    letter-spacing:.5px;
+    margin-bottom:10px;
+    box-shadow:0 4px 0 #d63f70;
+  }
+  header h1{
+    font-family:'Baloo 2', sans-serif;
+    font-size:clamp(26px,5.5vw,40px);
+    margin:0;
+    color:var(--ink);
+    text-shadow:3px 3px 0 rgba(255,201,60,.6);
+  }
+  header p{
+    margin:8px 0 0;
+    font-size:15px;
+    color:#5b5470;
+  }
+  @keyframes dropIn{
+    from{opacity:0; transform:translateY(-40px) scale(.9);}
+    to{opacity:1; transform:translateY(0) scale(1);}
+  }
+
+  /* progress bar */
+  .progress-wrap{
+    background:#fff;
+    border-radius:20px;
+    padding:5px;
+    box-shadow:0 3px 10px var(--shadow);
+    margin-bottom:22px;
+  }
+  .progress-bar{
+    height:16px;
+    border-radius:14px;
+    background:linear-gradient(90deg, var(--leaf), var(--sky));
+    width:0%;
+    transition:width .5s cubic-bezier(.34,1.56,.64,1);
+    position:relative;
+  }
+  .progress-label{
+    text-align:center;
+    font-size:13px;
+    font-weight:700;
+    color:#5b5470;
+    margin-top:6px;
+  }
+
+  /* card */
+  .card{
+    background:var(--card);
+    border-radius:26px;
+    padding:26px 24px 24px;
+    box-shadow:0 14px 0 var(--shadow), 0 20px 30px rgba(43,37,64,.12);
+    position:relative;
+    overflow:hidden;
+    animation:cardIn .5s cubic-bezier(.34,1.56,.64,1);
+  }
+  @keyframes cardIn{
+    from{opacity:0; transform:translateX(60px) rotate(2deg);}
+    to{opacity:1; transform:translateX(0) rotate(0deg);}
+  }
+  .card.leaving{
+    animation:cardOut .35s ease forwards;
+  }
+  @keyframes cardOut{
+    to{opacity:0; transform:translateX(-60px) rotate(-2deg);}
+  }
+
+  .qmeta{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:14px;
+  }
+  .qnum{
+    background:var(--sun);
+    color:var(--ink);
+    font-weight:800;
+    font-size:14px;
+    padding:6px 14px;
+    border-radius:16px;
+    box-shadow:0 3px 0 #e0a815;
+  }
+  .qcategory{
+    font-size:13px;
+    font-weight:700;
+    color:#fff;
+    background:var(--grape);
+    padding:5px 12px;
+    border-radius:14px;
+  }
+
+  .qtext{
+    font-size:clamp(17px,3.6vw,20px);
+    font-weight:700;
+    line-height:1.65;
+    margin:10px 0 20px;
+    white-space:pre-line;
+  }
+
+  .options{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+  }
+  .opt{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    background:#F7F5FF;
+    border:2.5px solid #E4E0FA;
+    border-radius:16px;
+    padding:14px 16px;
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
+    text-align:right;
+    transition:transform .15s ease, box-shadow .15s ease, background .15s ease, border-color .15s ease;
+  }
+  .opt:hover{
+    transform:translateY(-2px) scale(1.01);
+    box-shadow:0 6px 14px rgba(139,92,246,.18);
+    border-color:var(--grape);
+  }
+  .opt .letter{
+    flex:0 0 auto;
+    width:30px;height:30px;
+    border-radius:50%;
+    background:var(--grape);
+    color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    font-size:14px;
+    font-weight:800;
+  }
+  .opt.correct{
+    background:#E4FBEA;
+    border-color:var(--leaf);
+    animation:pop .4s ease;
+  }
+  .opt.correct .letter{background:var(--leaf);}
+  .opt.wrong{
+    background:#FFE7EC;
+    border-color:var(--berry);
+    animation:shake .4s ease;
+  }
+  .opt.wrong .letter{background:var(--berry);}
+  .opt.disabled{cursor:default;}
+  .opt.dim{opacity:.55;}
+
+  @keyframes pop{
+    0%{transform:scale(1);}
+    40%{transform:scale(1.04);}
+    100%{transform:scale(1);}
+  }
+  @keyframes shake{
+    0%,100%{transform:translateX(0);}
+    25%{transform:translateX(-6px);}
+    75%{transform:translateX(6px);}
+  }
+
+  .feedback{
+    margin-top:16px;
+    font-size:15px;
+    font-weight:700;
+    min-height:26px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .feedback.good{color:#1f9d4b;}
+  .feedback.bad{color:#e0356b;}
+
+  .nextbtn{
+    margin-top:18px;
+    width:100%;
+    padding:14px;
+    font-size:16px;
+    font-weight:800;
+    color:#fff;
+    background:linear-gradient(135deg, var(--sky), var(--grape));
+    border:none;
+    border-radius:16px;
+    cursor:pointer;
+    box-shadow:0 5px 0 #5b3fb8;
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .3s ease, transform .1s ease;
+    font-family:inherit;
+  }
+  .nextbtn.show{opacity:1; pointer-events:auto;}
+  .nextbtn:active{transform:translateY(3px); box-shadow:0 2px 0 #5b3fb8;}
+
+  /* start screen */
+  .start-screen{
+    text-align:center;
+    padding:30px 10px;
+  }
+  .start-screen .mascot{
+    font-size:70px;
+    display:inline-block;
+    animation:bounce 1.8s ease-in-out infinite;
+  }
+  @keyframes bounce{
+    0%,100%{transform:translateY(0) rotate(-4deg);}
+    50%{transform:translateY(-14px) rotate(4deg);}
+  }
+  .start-screen h2{
+    font-size:22px;
+    margin:14px 0 6px;
+  }
+  .start-screen p{
+    color:#5b5470;
+    font-size:15px;
+    line-height:1.6;
+    margin:0 0 22px;
+  }
+  .start-btn{
+    background:linear-gradient(135deg, var(--berry), #ff8aab);
+    color:#fff;
+    border:none;
+    font-size:18px;
+    font-weight:800;
+    padding:16px 40px;
+    border-radius:20px;
+    cursor:pointer;
+    box-shadow:0 6px 0 #c93b63;
+    font-family:inherit;
+    transition:transform .1s ease;
+  }
+  .start-btn:active{transform:translateY(4px); box-shadow:0 2px 0 #c93b63;}
+
+  /* result screen */
+  .result-screen{
+    text-align:center;
+    padding:10px 4px 4px;
+  }
+  .result-screen .stars{
+    font-size:44px;
+    margin-bottom:6px;
+    animation:popIn .6s cubic-bezier(.34,1.56,.64,1);
+  }
+  @keyframes popIn{
+    from{opacity:0; transform:scale(.3);}
+    to{opacity:1; transform:scale(1);}
+  }
+  .score-circle{
+    width:160px;height:160px;
+    border-radius:50%;
+    margin:14px auto 18px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    background:conic-gradient(var(--leaf) calc(var(--pct)*1%), #EDEAF7 0);
+    position:relative;
+    animation:popIn .7s cubic-bezier(.34,1.56,.64,1);
+  }
+  .score-circle::before{
+    content:"";
+    position:absolute;
+    width:126px;height:126px;
+    background:#fff;
+    border-radius:50%;
+    box-shadow:inset 0 2px 6px rgba(0,0,0,.06);
+  }
+  .score-circle .score-num{
+    position:relative;
+    font-size:34px;
+    font-weight:800;
+    color:var(--ink);
+  }
+  .score-circle .score-sub{
+    position:relative;
+    font-size:13px;
+    color:#8a83a0;
+    font-weight:700;
+  }
+  .result-msg{
+    font-size:19px;
+    font-weight:800;
+    margin:6px 0 4px;
+  }
+  .result-sub{
+    color:#5b5470;
+    font-size:14px;
+    margin-bottom:22px;
+  }
+
+  .review-list{
+    text-align:right;
+    margin-top:10px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+  .review-item{
+    background:#F7F5FF;
+    border-radius:14px;
+    padding:12px 14px;
+    border-right:5px solid var(--leaf);
+    font-size:14px;
+  }
+  .review-item.wrong{border-right-color:var(--berry);}
+  .review-item .rq{font-weight:700; margin-bottom:5px;}
+  .review-item .ra{color:#5b5470;}
+  .review-item .ra b{color:var(--ink);}
+  .review-item .tag{
+    display:inline-block;
+    font-size:11px;
+    font-weight:800;
+    padding:2px 9px;
+    border-radius:10px;
+    margin-inline-start:6px;
+    background:var(--leaf);
+    color:#fff;
+  }
+  .review-item.wrong .tag{background:var(--berry);}
+
+  .restart-btn{
+    margin-top:22px;
+    background:linear-gradient(135deg, var(--sun), #ffdb7a);
+    color:var(--ink);
+    border:none;
+    font-size:16px;
+    font-weight:800;
+    padding:14px 30px;
+    border-radius:16px;
+    cursor:pointer;
+    box-shadow:0 5px 0 #d9a416;
+    font-family:inherit;
+  }
+  .restart-btn:active{transform:translateY(3px); box-shadow:0 2px 0 #d9a416;}
+
+  .hidden{display:none !important;}
+
+  /* confetti */
+  .confetti{
+    position:fixed;
+    top:-20px;
+    width:10px;height:16px;
+    z-index:5;
+    animation:confettiFall linear forwards;
+  }
+  @keyframes confettiFall{
+    to{transform:translateY(110vh) rotate(540deg); opacity:.9;}
+  }
+
+  footer{
+    text-align:center;
+    font-size:12px;
+    color:#a49bbf;
+    margin-top:30px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-shape s1"></div>
+<div class="bg-shape s2"></div>
+<div class="bg-shape s3"></div>
+<div class="bg-shape s4"></div>
+<div class="bg-shape s5"></div>
+
+<div class="wrap">
+  <header>
+    <span class="badge">5 ශ්‍රේණිය • බුද්ධි වර්ධන ප්‍රශ්නාවලිය</span>
+    <h1>🧠 හිතන්න, විසඳන්න, දිනන්න! 🎉</h1>
+    <p>ගණිතය • ප්‍රහේලිකා • පොදු දැනුම — සියල්ල එකට!</p>
+  </header>
+
+  <div class="progress-wrap" id="progressWrap" style="display:none;">
+    <div class="progress-bar" id="progressBar"></div>
+    <div class="progress-label" id="progressLabel">ප්‍රශ්නය 1 / 14</div>
+  </div>
+
+  <!-- START SCREEN -->
+  <div class="card" id="startCard">
+    <div class="start-screen">
+      <div class="mascot">🦉</div>
+      <h2>ආයුබෝවන් පොඩි හීරෝ! 👋</h2>
+      <p>ප්‍රශ්න 14ක් ඔබ ට එනවා — ගණිත ප්‍රහේලිකා, තර්ක ප්‍රශ්න සහ පොදු දැනුම් ප්‍රශ්න.<br>හොඳින් හිතලා නිවැරදි උත්තරය තෝරන්න. සූදානම් ද?</p>
+      <button class="start-btn" onclick="startQuiz()">ආරම්භ කරමු ▶</button>
+    </div>
+  </div>
+
+  <!-- QUESTION CARD -->
+  <div class="card hidden" id="quizCard">
+    <div class="qmeta">
+      <span class="qnum" id="qNumBadge">1 / 14</span>
+      <span class="qcategory" id="qCatBadge">ගණිතය</span>
+    </div>
+    <div class="qtext" id="qText"></div>
+    <div class="options" id="optionsWrap"></div>
+    <div class="feedback" id="feedback"></div>
+    <button class="nextbtn" id="nextBtn" onclick="nextQuestion()">ඊළඟ ප්‍රශ්නය ➜</button>
+  </div>
+
+  <!-- RESULT CARD -->
+  <div class="card hidden" id="resultCard">
+    <div class="result-screen">
+      <div class="stars" id="starsDisplay">🌟🌟🌟</div>
+      <div class="score-circle" id="scoreCircle" style="--pct:0;">
+        <div class="score-num" id="scoreNum">0/14</div>
+        <div class="score-sub">ලකුණු</div>
+      </div>
+      <div class="result-msg" id="resultMsg"></div>
+      <div class="result-sub" id="resultSub"></div>
+      <div class="review-list" id="reviewList"></div>
+      <button class="restart-btn" onclick="restartQuiz()">🔁 නැවත උත්සාහ කරමු</button>
+    </div>
+  </div>
+
+  <footer>5 ශ්‍රේණිය සිසුන් සඳහා විශේෂයෙන් සකසන ලදී 🌈</footer>
+</div>
+
+<script>
+const questions = [
+  {
+    cat: "තර්කනය",
+    q: "නැගෙනහිර දිශාවට මුහුණලා සිටි දිනිති වරකට වට කාලක් බැගින් තුන් වතාවක් වාමාවර්තව හැරී නතර වූවා ය. දැන් ඇයගේ වම් අත පැත්තේ ඇති දිශාව කුමක් ද ?",
+    options: ["දකුණ", "නැගෙනහිර", "උතුර"],
+    answer: 2,
+    explain: "වට කාලයක් යනු පූර්ණ භ්‍රමණයක් (360°) බැවින්, තුන් වරක් හැරුණත් ඇය නැවතත් නැගෙනහිරටම මුහුණලා සිටියි. නැගෙනහිරට මුහුණලා සිටින විට වම් අත උතුර දෙසට යොමු වේ."
+  },
+  {
+    cat: "ගණිතය",
+    q: "මට මිතුරන් පස්දෙනෙක් සිටිති. අපි සියලු දෙනාට ම එකිනෙකා අතර හුවමාරු කරගැනීමට අවශ්‍ය වෙසක් කාඩ්පත් ගණන කීය ද ?",
+    options: ["20", "15", "30"],
+    answer: 0,
+    explain: "අය 5ක් සිටින විට, එක් අයෙකු අනෙක් 4 දෙනාට කාඩ්පත් දිය යුතුයි. එසේ නම් 5 × 4 = 20."
+  },
+  {
+    cat: "ගණිතය",
+    q: "කුඩා ගොවිපොළක කුකුළන් සහ ගවයින් 19 දෙනෙක් සිටිති. එහි සිටි ගවයින්ගේ පාද ගණන 24ක් නම් එහි සිටි කුකුළන්ගේ පාද ගණන කීය ද ?",
+    options: ["13", "26", "36"],
+    answer: 1,
+    explain: "ගවයෙකුට පාද 4ක් ඇති බැවින් ගවයින් ගණන 24÷4=6. එවිට කුකුළන් ගණන 19−6=13. කුකුළෙකුට පාද 2ක් බැවින් කුකුළන්ගේ පාද ගණන 13×2=26."
+  },
+  {
+    cat: "දින දර්ශනය",
+    q: "ජනවාරි මාසයේ 1 දා ඉරිදා දවසකි. ඒ අනුව ජනවාරි මාසයේ 26වන දා ට යෙදෙන දවස කුමක්ද?",
+    options: ["සෙනසුරාදා", "අඟහරුවාදා", "බ්‍රහස්පතින්දා"],
+    answer: 2,
+    explain: "1, 8, 15, 22 යන දින ද ඉරිදා වේ. 26 වන දා යනු 22ට දින 4කින් පසුවයි (ඉරිදා→සඳුදා→අඟහරුවාදා→බදාදා→බ්‍රහස්පතින්දා). එබැවින් 26 වන දා බ්‍රහස්පතින්දා වේ."
+  },
+  {
+    cat: "ගණිතය",
+    q: "ළමයින් 4 දෙනෙකු එක සමාන වේගයකින් බනිස් ගෙඩි 4 ක් කෑම සඳහා මිනිත්තු 4 ක් ගත කරයි. එම ආකාරයටම ළමයින් දෙදෙනෙකු බනිස් ගෙඩි 2ක් කෑමට මිනිත්තු කීයක් ගත කරයි ද?",
+    options: ["මිනිත්තු 4", "මිනිත්තු 2", "මිනිත්තු 8"],
+    answer: 0,
+    explain: "එක් ළමයෙකු එක් බනිස් ගෙඩියක් කෑමට ගතවන කාලය මිනිත්තු 4කි. එබැවින් ළමයින් ගණන අඩුවුවත් එක් අයෙකුට එක් බනිස් ගෙඩියක් වන බැවින් කාලය මිනිත්තු 4ක් ම වේ."
+  },
+  {
+    cat: "ගණිතය",
+    q: "පානදුර බස් නැවතුම්පළින් සෑම මිනිත්තු 20 ට වරක් කොළඹ බලා බස් රථයක් ද, සෑම මිනිත්තු 30 ට වරක් රත්නපුරය බලා බස් රථයක් ද පිටත් වෙයි. මෙම බස් රථ දෙක ම පෙරවරු 8.00 ට පිටත් ව ගියේ නම් නැවත බස් රථ දෙක ම එකවර පිටත්වන වේලාවක් වන්නේ,",
+    options: ["පෙ.ව.8.30", "පෙ.ව.9.30", "පෙ.ව.10.00"],
+    answer: 1,
+    explain: "මිනිත්තු 20 සහ මිනිත්තු 30 හි කුඩාම පොදු ගුණාකාරය (LCM) මත රඳා පවතී. දී ඇති පිළිතුරු අතරින් ඊළඟට දෙක ම එකට පිටත් වන වේලාව ලෙස පෙ.ව. 9.30 හඳුනාගත හැක."
+  },
+  {
+    cat: "ප්‍රහේලිකාව",
+    q: "පියාඹන්න හැකියාව මෙමට / අත්තටු නැත මගෙ සිරුරට / අඬන්න පුළුවනි මා හට / දෑස් නොමැත මගෙ මුහුණට - ඉහත කවියෙන් කියවෙන්නේ කුමක් ගැනද?",
+    options: ["සුළඟ", "උකුස්සා", "වලාකුළ"],
+    answer: 2,
+    explain: "වලාකුළට අත්තටු නොමැතිව අහසේ 'පියාඹන්නට' පුළුවන්, තවද වැස්ස ලෙස 'අඬන්නට' ද පුළුවන් — නමුත් එයට දෑස් නැත. එබැවින් පිළිතුර වලාකුළයි."
+  },
+  {
+    cat: "ඥාති සම්බන්ධතා",
+    q: "ශාලිකාගේ දුව මගේ දුව ගේ අම්මා නම් ශාලිකා යනු මගේ,",
+    options: ["බිරිඳ වේ", "අම්මා වේ", "නැන්දණිය (නැන්දම්මා) වේ"],
+    answer: 2,
+    explain: "ශාලිකාගේ දුව මගේ දුවගේ අම්මා යනු ‘මගේ බිරිඳ’ බව අදහස් වේ. එසේ නම් ශාලිකා යනු මගේ බිරිඳගේ අම්මා, එනම් මගේ නැන්දම්මා (නැන්දණිය) වේ."
+  },
+  {
+    cat: "තර්කනය",
+    q: "\"මට ඉන්නේ අයියා කෙනෙකුයි අක්කා කෙනෙකුයි විතරයි. අපේ අම්මාටයි තාත්තාටයි පුතාලා දෙන්නෙකුයි දුවෙකුයි ඉන්නවා.\" යනුවෙන් ළමයෙක් ප්‍රකාශ කරයි. ඒ අනුව එම ළමයා පවුලේ කවුරුන් විය හැකි ද?",
+    options: ["බාල දියණිය", "බාල පුතා", "වැඩිමහල් පුතා"],
+    answer: 1,
+    explain: "දෙමව්පියන්ට පුතුන් දෙදෙනෙක් සහ දුවක් සිටී. කථා කරන ළමයාට අයියා කෙනෙක් සහ අක්කා කෙනෙක් සිටින බැවින් ඔහුට වඩා වයසින් වැඩි සොයුරෙක් සහ සොයුරියක් සිටී. එනම් ඔහු පුතුන් දෙදෙනා අතරින් බාල අයයි — බාල පුතා."
+  },
+  {
+    cat: "පොදු දැනුම",
+    q: "ශ්‍රී ලංකාවේ ප්‍රථමයෙන් ම කර වූ වැව වන්නේ,",
+    options: ["තිසා වැව", "අභය වැව", "පරාක්‍රම සමුද්‍රය"],
+    answer: 0,
+    explain: "ශ්‍රී ලංකා ඉතිහාසයේ ප්‍රථම වැව ලෙස සැලකෙන්නේ තිසා වැවයි."
+  },
+  {
+    cat: "පොදු දැනුම",
+    q: "ශ්‍රී ලංකාවේ මැණික් සඳහා ප්‍රසිද්ධ වන්නේ,",
+    options: ["යාපනය", "මාතර", "රත්නපුර"],
+    answer: 2,
+    explain: "රත්නපුර ප්‍රදේශය මැණික් නිධි සඳහා ලෝක ප්‍රසිද්ධය. එබැවින් එයට 'මැණික් නගරය' යනුවෙන් ද කියනු ලැබේ."
+  },
+  {
+    cat: "පරිසර දැනුම",
+    q: "රාත්‍රී කාලයේ පරිසරයේ දක්නට ලැබෙන පක්ෂියෙක් නොවේ,",
+    options: ["උලමා", "බස්සා", "කෑදැත්තා"],
+    answer: 1,
+    explain: "උලමා සහ කෑදැත්තා රාත්‍රී කාලයේ ක්‍රියාශීලී පක්ෂීන් වන අතර, බස්සා දහවල් කාලයේ ක්‍රියාශීලී පක්ෂියෙකි. එබැවින් රාත්‍රියේ දක්නට නොලැබෙන්නේ බස්සායි."
+  },
+  {
+    cat: "ආරක්ෂාව",
+    q: "ඇඳ සිටින ඇඳුමට ගිනි ඇවිලී ඇති කෙනෙකු ඉක්මනින් ම කළ යුත්තේ,",
+    options: ["හැකි ඉක්මනින් වතුර ඇති තැනකට දිවීම", "බිම පෙරලීමට සැලැස්වීම", "රෙද්දකින් එතීම"],
+    answer: 1,
+    explain: "ගින්නට ඔක්සිජන් සැපයීම නැවැත්වීමට වහාම නතර වී, බිම වැටී පෙරළීම (Stop, Drop, Roll) වඩාත් ම ආරක්ෂිත හා ඉක්මන් ක්‍රියාමාර්ගයයි."
+  },
+  {
+    cat: "පොදු දැනුම",
+    q: "ජාතික කොඩිය අඩකුඹු කරන අවස්ථාවකි,",
+    options: ["ජාතික ශෝක දිනයක දී", "රජයේ නිලධාරියෙක් මිය ගිය විට", "විදේශීය නායකයෙක් පැමිණි විට"],
+    answer: 0,
+    explain: "ජාතික ශෝක දිනයක දී, රටේ දුකට සහභාගී වීමේ සංකේතයක් ලෙස ජාතික කොඩිය අඩකුඹු කරනු ලැබේ."
+  }
+];
+
+let current = 0;
+let score = 0;
+let userAnswers = [];
+let answered = false;
+
+const startCard = document.getElementById('startCard');
+const quizCard = document.getElementById('quizCard');
+const resultCard = document.getElementById('resultCard');
+const progressWrap = document.getElementById('progressWrap');
+const progressBar = document.getElementById('progressBar');
+const progressLabel = document.getElementById('progressLabel');
+const qNumBadge = document.getElementById('qNumBadge');
+const qCatBadge = document.getElementById('qCatBadge');
+const qText = document.getElementById('qText');
+const optionsWrap = document.getElementById('optionsWrap');
+const feedback = document.getElementById('feedback');
+const nextBtn = document.getElementById('nextBtn');
+
+function startQuiz(){
+  startCard.classList.add('hidden');
+  quizCard.classList.remove('hidden');
+  progressWrap.style.display = 'block';
+  current = 0;
+  score = 0;
+  userAnswers = [];
+  renderQuestion();
+}
+
+function renderQuestion(){
+  answered = false;
+  const item = questions[current];
+  qNumBadge.textContent = (current+1) + " / " + questions.length;
+  qCatBadge.textContent = item.cat;
+  qText.textContent = item.q;
+  feedback.textContent = "";
+  feedback.className = "feedback";
+  nextBtn.classList.remove('show');
+  nextBtn.textContent = (current === questions.length - 1) ? "ප්‍රතිඵල බලමු 🏁" : "ඊළඟ ප්‍රශ්නය ➜";
+
+  optionsWrap.innerHTML = "";
+  const letters = ["අ","ආ","ඇ"];
+  item.options.forEach((opt, idx) => {
+    const div = document.createElement('div');
+    div.className = "opt";
+    div.innerHTML = `<span class="letter">${letters[idx]}</span><span>${opt}</span>`;
+    div.onclick = () => selectAnswer(idx, div);
+    optionsWrap.appendChild(div);
+  });
+
+  const pct = Math.round((current) / questions.length * 100);
+  progressBar.style.width = pct + "%";
+  progressLabel.textContent = "ප්‍රශ්නය " + (current+1) + " / " + questions.length;
+
+  quizCard.classList.remove('leaving');
+}
+
+function selectAnswer(idx, el){
+  if(answered) return;
+  answered = true;
+  const item = questions[current];
+  const allOpts = optionsWrap.querySelectorAll('.opt');
+
+  allOpts.forEach(o => o.classList.add('disabled'));
+
+  if(idx === item.answer){
+    el.classList.add('correct');
+    score++;
+    feedback.textContent = "✅ නිවැරදියි! " + item.explain;
+    feedback.className = "feedback good";
+    launchConfettiBurst();
+  } else {
+    el.classList.add('wrong');
+    allOpts[item.answer].classList.add('correct');
+    feedback.textContent = "❌ එය සම්පූර්ණයෙන් නිවැරදි නෑ. " + item.explain;
+    feedback.className = "feedback bad";
+  }
+
+  allOpts.forEach((o, i) => {
+    if(i !== idx && i !== item.answer) o.classList.add('dim');
+  });
+
+  userAnswers.push(idx === item.answer);
+  nextBtn.classList.add('show');
+}
+
+function nextQuestion(){
+  if(current === questions.length - 1){
+    showResults();
+    return;
+  }
+  quizCard.classList.add('leaving');
+  setTimeout(() => {
+    current++;
+    renderQuestion();
+  }, 320);
+}
+
+function showResults(){
+  quizCard.classList.add('hidden');
+  resultCard.classList.remove('hidden');
+  progressBar.style.width = "100%";
+  progressLabel.textContent = "සම්පූර්ණයි! 🎉";
+
+  const total = questions.length;
+  const pct = Math.round(score/total*100);
+  document.getElementById('scoreCircle').style.setProperty('--pct', pct);
+  document.getElementById('scoreNum').textContent = score + "/" + total;
+
+  let stars = "⭐";
+  let msg = "";
+  let sub = "";
+  if(pct >= 85){
+    stars = "🌟🌟🌟"; msg = "අපූරුයි! ඔබ සැබෑ ම බුද්ධි තරුවක්! 🏆"; sub = "ඔබේ තර්කන හැකියාව හා දැනුම ඉතාම ඉහළයි.";
+    launchConfettiBig();
+  } else if(pct >= 60){
+    stars = "🌟🌟"; msg = "ඉතා හොඳයි! 👏"; sub = "ටිකක් තව පුරුදු වුනොත් ඔබත් ‘සුපිරි ශිෂ්‍යයෙක්’!";
+  } else if(pct >= 40){
+    stars = "🌟"; msg = "හොඳ පටන් ගැනීමක්! 💪"; sub = "නැවත උත්සාහ කර, පැහැදිලි කිරීම් හොඳින් කියවන්න.";
+  } else {
+    stars = "🌱"; msg = "කමක් නෑ, පුරුදු වෙන්න ඕන! 😊"; sub = "සෑම වීරයෙක්ම පටන් ගන්නේ මෙහෙමයි — නැවත උත්සාහ කරමු!";
+  }
+  document.getElementById('starsDisplay').textContent = stars;
+  document.getElementById('resultMsg').textContent = msg;
+  document.getElementById('resultSub').textContent = sub;
+
+  const reviewList = document.getElementById('reviewList');
+  reviewList.innerHTML = "";
+  questions.forEach((item, i) => {
+    const correct = userAnswers[i];
+    const div = document.createElement('div');
+    div.className = "review-item" + (correct ? "" : " wrong");
+    div.innerHTML = `
+      <div class="rq">${i+1}. ${item.q} <span class="tag">${correct ? "✔ නිවැරදියි" : "✘ වැරදියි"}</span></div>
+      <div class="ra">නිවැරදි පිළිතුර: <b>${item.options[item.answer]}</b></div>
+    `;
+    reviewList.appendChild(div);
+  });
+}
+
+function restartQuiz(){
+  resultCard.classList.add('hidden');
+  startCard.classList.remove('hidden');
+  progressWrap.style.display = 'none';
+  progressBar.style.width = '0%';
+}
+
+/* confetti effects */
+function launchConfettiBurst(){
+  const colors = ['#FFC93C','#33C6E8','#4CD070','#FF5D8F','#8B5CF6'];
+  for(let i=0;i<16;i++){
+    const c = document.createElement('div');
+    c.className = 'confetti';
+    c.style.left = (40 + Math.random()*20) + "vw";
+    c.style.background = colors[Math.floor(Math.random()*colors.length)];
+    c.style.animationDuration = (1 + Math.random()*0.8) + "s";
+    c.style.borderRadius = Math.random() > .5 ? "50%" : "2px";
+    document.body.appendChild(c);
+    setTimeout(() => c.remove(), 2000);
+  }
+}
+function launchConfettiBig(){
+  const colors = ['#FFC93C','#33C6E8','#4CD070','#FF5D8F','#8B5CF6'];
+  for(let i=0;i<60;i++){
+    const c = document.createElement('div');
+    c.className = 'confetti';
+    c.style.left = Math.random()*100 + "vw";
+    c.style.background = colors[Math.floor(Math.random()*colors.length)];
+    c.style.animationDuration = (1.4 + Math.random()*1.4) + "s";
+    c.style.animationDelay = (Math.random()*0.6) + "s";
+    c.style.borderRadius = Math.random() > .5 ? "50%" : "2px";
+    document.body.appendChild(c);
+    setTimeout(() => c.remove(), 3200);
+  }
+}
+</script>
+</body>
+</html>
