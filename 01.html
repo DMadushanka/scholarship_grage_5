@@ -1,0 +1,1389 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5 ශ්‍රේණිය - බෝවිටියා මල් යාය ප්‍රශ්නාවලිය 2026 (I පත්‍රය)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2E7D32;
+            --primary-light: #E8F5E9;
+            --accent: #FF9800;
+            --bg-gradient: linear-gradient(135deg, #f0f7f4 0%, #e3eeef 100%);
+            --card-bg: #ffffff;
+            --text-main: #2c3e50;
+            --text-muted: #666666;
+            --correct-bg: #d4edda;
+            --correct-border: #28a745;
+            --correct-text: #155724;
+            --wrong-bg: #f8d7da;
+            --wrong-border: #dc3545;
+            --wrong-text: #721c24;
+            --border-radius: 16px;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Noto Sans Sinhala', sans-serif;
+            background: var(--bg-gradient);
+            min-height: 100vh;
+            padding: 20px 15px;
+            color: var(--text-main);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 850px;
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 35px 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            padding-bottom: 20px;
+            border-bottom: 3px solid var(--primary);
+            margin-bottom: 25px;
+        }
+
+        .header h1 {
+            color: var(--primary);
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 6px;
+            letter-spacing: -0.2px;
+        }
+
+        .header .subtitle {
+            color: var(--text-muted);
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .header .badge {
+            display: inline-block;
+            background: #fff3e0;
+            color: #e65100;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 700;
+            margin-top: 8px;
+        }
+
+        /* Utility */
+        .hidden {
+            display: none !important;
+        }
+
+        /* Start Screen */
+        .start-screen {
+            text-align: center;
+            padding: 20px 10px;
+        }
+
+        .start-icon {
+            font-size: 64px;
+            margin-bottom: 15px;
+            display: inline-block;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .start-screen h2 {
+            font-size: 22px;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .start-screen p {
+            font-size: 16px;
+            line-height: 1.7;
+            color: #444;
+            margin-bottom: 25px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .info-card {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px solid #e9ecef;
+        }
+
+        .info-card .num {
+            font-size: 26px;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .info-card .label {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        .btn-start {
+            background: linear-gradient(135deg, #2E7D32, #4CAF50);
+            color: white;
+            border: none;
+            padding: 16px 40px;
+            font-size: 18px;
+            font-weight: 700;
+            font-family: inherit;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(46, 125, 50, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .btn-start:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(46, 125, 50, 0.4);
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            margin-bottom: 20px;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .progress-bar-bg {
+            background: #e0e0e0;
+            border-radius: 10px;
+            height: 12px;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #2E7D32, #8BC34A);
+            width: 0%;
+            transition: width 0.4s ease;
+            border-radius: 10px;
+        }
+
+        /* Question Card */
+        .question-card {
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .question-text {
+            font-size: 18px;
+            font-weight: 600;
+            line-height: 1.8;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 12px;
+            border-right: 5px solid var(--primary);
+            white-space: pre-line;
+            margin-bottom: 20px;
+        }
+
+        .question-image-box {
+            text-align: center;
+            margin: 20px 0;
+            padding: 15px;
+            background: #fafafa;
+            border: 2px dashed #cfd8dc;
+            border-radius: 12px;
+        }
+
+        .question-image-box img {
+            max-width: 100%;
+            max-height: 380px;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+            transition: transform 0.3s ease;
+        }
+
+        /* Options */
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .option-item {
+            display: flex;
+            align-items: center;
+            padding: 14px 18px;
+            background: #ffffff;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .option-item:hover:not(.disabled) {
+            background: #f0f7ff;
+            border-color: #2196F3;
+            transform: translateX(6px);
+        }
+
+        .option-badge {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: #eceff1;
+            color: #455a64;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 15px;
+            margin-right: 15px;
+            flex-shrink: 0;
+            transition: all 0.2s ease;
+        }
+
+        .option-item.correct {
+            background: var(--correct-bg);
+            border-color: var(--correct-border);
+            color: var(--correct-text);
+        }
+
+        .option-item.correct .option-badge {
+            background: var(--correct-border);
+            color: white;
+        }
+
+        .option-item.wrong {
+            background: var(--wrong-bg);
+            border-color: var(--wrong-border);
+            color: var(--wrong-text);
+        }
+
+        .option-item.wrong .option-badge {
+            background: var(--wrong-border);
+            color: white;
+        }
+
+        .option-item.disabled {
+            cursor: default;
+        }
+
+        .option-item.dim {
+            opacity: 0.45;
+        }
+
+        /* Feedback Box */
+        .feedback-box {
+            padding: 15px 20px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 16px;
+            margin: 15px 0;
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .feedback-box.correct {
+            display: block;
+            background: var(--correct-bg);
+            color: var(--correct-text);
+            border-right: 5px solid var(--correct-border);
+        }
+
+        .feedback-box.wrong {
+            display: block;
+            background: var(--wrong-bg);
+            color: var(--wrong-text);
+            border-right: 5px solid var(--wrong-border);
+        }
+
+        /* Navigation Buttons */
+        .nav-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 25px;
+            gap: 15px;
+        }
+
+        .btn-nav {
+            padding: 12px 28px;
+            font-size: 16px;
+            font-weight: 700;
+            font-family: inherit;
+            border-radius: 10px;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s ease;
+        }
+
+        .btn-prev {
+            background: #eceff1;
+            color: #455a64;
+        }
+
+        .btn-prev:hover:not(:disabled) {
+            background: #cfd8dc;
+        }
+
+        .btn-next {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 4px 12px rgba(46, 125, 50, 0.25);
+        }
+
+        .btn-next:hover:not(:disabled) {
+            background: #1b5e20;
+        }
+
+        .btn-nav:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        /* Results Card */
+        .results-card {
+            text-align: center;
+            padding: 20px 10px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .score-circle {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            background: conic-gradient(var(--primary) calc(var(--pct) * 1%), #e0e0e0 0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px auto;
+            position: relative;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+
+        .score-circle-inner {
+            width: 115px;
+            height: 115px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .score-num {
+            font-size: 30px;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .score-pct {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-muted);
+        }
+
+        .result-stars {
+            font-size: 36px;
+            margin: 15px 0 5px 0;
+        }
+
+        .result-title {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .result-desc {
+            font-size: 16px;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+        }
+
+        /* Review Section */
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 30px 0 15px 0;
+            padding-top: 20px;
+            border-top: 2px solid #e0e0e0;
+        }
+
+        .review-header h3 {
+            font-size: 18px;
+            color: var(--text-main);
+        }
+
+        .filter-btns {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-filter {
+            padding: 6px 14px;
+            border-radius: 20px;
+            border: 1px solid #cfd8dc;
+            background: white;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .btn-filter.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .review-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            text-align: left;
+            max-height: 500px;
+            overflow-y: auto;
+            padding-right: 5px;
+        }
+
+        .review-item {
+            padding: 16px;
+            border-radius: 12px;
+            background: #f8f9fa;
+            border-left: 4px solid var(--correct-border);
+        }
+
+        .review-item.wrong {
+            border-left-color: var(--wrong-border);
+        }
+
+        .review-q-num {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .review-q-text {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            white-space: pre-line;
+        }
+
+        .review-img img {
+            max-width: 100%;
+            max-height: 180px;
+            border-radius: 8px;
+            margin: 8px 0;
+        }
+
+        .review-ans {
+            font-size: 14px;
+            margin-top: 6px;
+        }
+
+        .review-ans.correct-text {
+            color: var(--correct-border);
+            font-weight: 700;
+        }
+
+        .review-ans.wrong-text {
+            color: var(--wrong-border);
+            font-weight: 700;
+        }
+
+        .btn-restart {
+            margin-top: 25px;
+            background: linear-gradient(135deg, #2196F3, #1976D2);
+            color: white;
+            border: none;
+            padding: 14px 35px;
+            font-size: 17px;
+            font-weight: 700;
+            font-family: inherit;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .btn-restart:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(33, 150, 243, 0.4);
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px 16px;
+            }
+            .header h1 {
+                font-size: 20px;
+            }
+            .question-text {
+                font-size: 16px;
+                padding: 15px;
+            }
+            .option-item {
+                font-size: 15px;
+                padding: 12px 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>5 ශ්‍රේණිය - බෝවිටියා මල් යාය 2026</h1>
+            <div class="subtitle">දකුණු පළාත් අධ්‍යාපන දෙපාර්තමේන්තුව - නිපුණතා සංවර්ධන පෙරහුරුව - 01</div>
+            <div class="badge">I පත්‍රය - ප්‍රශ්න 40</div>
+        </div>
+
+        <!-- Start Screen -->
+        <div id="startScreen" class="start-screen">
+            <div class="start-icon">🌸</div>
+            <h2>ශිෂ්‍යත්ව පෙරහුරු ප්‍රශ්නාවලිය</h2>
+            <p>මෙම ප්‍රශ්නාවලිය සඳහා I පත්‍රයේ ප්‍රශ්න 40 ම අඩංගු කර ඇත.<br>සෑම ප්‍රශ්නයකටම නිවැරදි පිළිතුර තෝරා ඔබේ දැනුම පරික්‍ෂා කරගන්න.</p>
+            
+            <div class="info-grid">
+                <div class="info-card">
+                    <div class="num">40</div>
+                    <div class="label">මුළු ප්‍රශ්න ගණන</div>
+                </div>
+                <div class="info-card">
+                    <div class="num">3</div>
+                    <div class="label">වරණ ගණන (අ, ආ, ඇ)</div>
+                </div>
+                <div class="info-card">
+                    <div class="num">100%</div>
+                    <div class="label">ස්වයංක්‍රීය ලකුණු ලබාදීම</div>
+                </div>
+            </div>
+
+            <button class="btn-start" onclick="startQuiz()">🚀 ප්‍රශ්නාවලිය ආරම්භ කරන්න</button>
+        </div>
+
+        <!-- Progress Area -->
+        <div id="progressArea" class="progress-container hidden">
+            <div class="progress-info">
+                <span id="questionCounter">ප්‍රශ්නය 1 / 40</span>
+                <span id="scoreTracker">ලකුණු: 0</span>
+            </div>
+            <div class="progress-bar-bg">
+                <div id="progressBar" class="progress-bar-fill"></div>
+            </div>
+        </div>
+
+        <!-- Quiz Card -->
+        <div id="quizCard" class="question-card hidden">
+            <div id="questionText" class="question-text"></div>
+
+            <div id="imageContainer" class="question-image-box hidden">
+                <img id="questionImage" src="" alt="ප්‍රශ්නයට අදාළ රූප සටහන">
+            </div>
+
+            <div id="optionsContainer" class="options-list"></div>
+
+            <div id="feedback" class="feedback-box"></div>
+
+            <div class="nav-actions">
+                <button id="prevBtn" class="btn-nav btn-prev" onclick="prevQuestion()">◀ පෙර</button>
+                <button id="nextBtn" class="btn-nav btn-next" onclick="nextQuestion()" disabled>ඊළඟ ▶</button>
+            </div>
+        </div>
+
+        <!-- Result Card -->
+        <div id="resultCard" class="results-card hidden">
+            <div id="scoreCircle" class="score-circle" style="--pct: 0%">
+                <div class="score-circle-inner">
+                    <div id="scoreNum" class="score-num">0/40</div>
+                    <div id="scorePct" class="score-pct">0%</div>
+                </div>
+            </div>
+
+            <div id="resultStars" class="result-stars">🌟🌟🌟</div>
+            <div id="resultMsg" class="result-title">අපූරුයි!</div>
+            <div id="resultSub" class="result-desc">ඔබ ඉතා හොඳින් පිළිතුරු සපයා ඇත.</div>
+
+            <div class="review-header">
+                <h3>📝 ප්‍රශ්න සමාලෝචනය</h3>
+                <div class="filter-btns">
+                    <button class="btn-filter active" onclick="filterReview('all', event)">සියල්ල</button>
+                    <button class="btn-filter" onclick="filterReview('correct', event)">නිවැරදි</button>
+                    <button class="btn-filter" onclick="filterReview('wrong', event)">වැරදි</button>
+                </div>
+            </div>
+
+            <div id="reviewList" class="review-list"></div>
+
+            <button class="btn-restart" onclick="restartQuiz()">🔄 නැවත ආරම්භ කරන්න</button>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+    {
+        "id": 1,
+        "text": "මුලින් දී ඇති රූපයට සමාන රූපය කුමක්ද?",
+        "options": [
+            "(1) රූපය",
+            "(2) රූපය",
+            "(3) රූපය"
+        ],
+        "answer": 0,
+        "hasImage": true,
+        "image": "images/q1.png"
+    },
+    {
+        "id": 2,
+        "text": "රූප යුගල අතර වඩාත් හොඳින් ගැළපෙන සම්බන්ධතාවයක් දක්වන පිළිතුර කුමක්ද?",
+        "options": [
+            "(1) රූපය",
+            "(2) රූපය",
+            "(3) රූපය"
+        ],
+        "answer": 2,
+        "hasImage": true,
+        "image": "images/q2.png"
+    },
+    {
+        "id": 3,
+        "text": "පහත කොටුවේ ඇති තල රූප ඒවායේ පාද අනුව ගොඩවල් කීයකට වෙන් කළ හැකිද?",
+        "options": [
+            "තුනකට",
+            "හතරකට",
+            "පහකට"
+        ],
+        "answer": 0,
+        "hasImage": true,
+        "image": "images/q3.png"
+    },
+    {
+        "id": 4,
+        "text": "A, B සහ C කාඩ්පත්වල ඇති වචන යුගලයේ ම සමාන අකුරු දෙක බැගින් සඳහන් වන කාඩ්පත කුමක්ද?",
+        "options": [
+            "A",
+            "B",
+            "C"
+        ],
+        "answer": 1,
+        "hasImage": true,
+        "image": "images/q4.png"
+    },
+    {
+        "id": 5,
+        "text": "කඳු අතරින් හිරු     හිනැහෙයි\\nඅඳුර මැකී එළිය     වැටෙයි\\nමල්ගොමු එකිනෙක   සුපිබෙයි\\nකුරුලු ගීත හඬ       රැව්දෙයි\\n\\nඉහත සඳහන් කවියට වඩාත් හොඳින් ගැළපෙන මාතෘකාව,",
+        "options": [
+            "වනාන්තරය",
+            "හිරු කුමරු",
+            "උදෑසන"
+        ],
+        "answer": 2,
+        "hasImage": false
+    },
+    {
+        "id": 6,
+        "text": "රූපයේ A අක්‍ෂරයෙන් සිවුපා සතෙක් සිටින ස්ථානයක් දක්වා ඇත. B හා C අක්‍ෂර දෙකෙන් දක්වා ඇති ස්ථාන දෙකට වඩාත් හොඳින් පිළිවෙළින් ගැළපෙන්නේ,",
+        "options": [
+            "සූර්යයා සහ චන්ද්‍රයා ය.",
+            "කොටිපැටවා සහ වළාකුළු ය.",
+            "වවුලා සහ තරු ය."
+        ],
+        "answer": 1,
+        "hasImage": true,
+        "image": "images/q6.png"
+    },
+    {
+        "id": 7,
+        "text": "සතුන්, ක්ෂීරපායි සතුන්, පක්ෂීන් සහ වවුලා යන වචන දැක්වීමට පහත සටහන ඇඳ ඇත. ඒ අනුව පක්ෂීන් දක්වා ඇති අක්‍ෂරය කුමක්ද?",
+        "options": [
+            "B",
+            "C",
+            "D"
+        ],
+        "answer": 2,
+        "hasImage": true,
+        "image": "images/q7.png"
+    },
+    {
+        "id": 8,
+        "text": "පහත සඳහන් භාජන 5 හි අඩංගු ජල ප්‍රමාණය කිසියම් පටිපාටියකට සකස් කළ විට නිවැරදි පිළිතුර වන්නේ,",
+        "options": [
+            "4, 1, 2, 5 සහ 3",
+            "5, 3, 2, 1 සහ 4",
+            "5, 2, 3, 1 සහ 4"
+        ],
+        "answer": 1,
+        "hasImage": true,
+        "image": "images/q8.png"
+    },
+    {
+        "id": 9,
+        "text": "සිසුන් 45 ක් සිටින පන්තියක එක් අයෙකුට පැන්සල් 4 බැගින් දීමට පෙට්ටිවල දොළහ බැගින් අඩංගු පැන්සල් පෙට්ටි කීයක් අවශ්‍යද?",
+        "options": [
+            "180",
+            "48",
+            "15"
+        ],
+        "answer": 2,
+        "hasImage": false
+    },
+    {
+        "id": 10,
+        "text": "1 සිට 19 තෙක් සංඛ්‍යා ලිවීමේ දී එකේ ඉලක්කම සහිත සංඛ්‍යා කීයක් තිබේ ද?",
+        "options": [
+            "11 කි.",
+            "12 කි.",
+            "13 කි."
+        ],
+        "answer": 0,
+        "hasImage": false
+    },
+    {
+        "id": 11,
+        "text": "A, B සහ C එකිනෙක සම්බන්ධ කළ කම්බි රාමු තුනකි. P නම් ස්ථානයකින් ගමන ආරම්භ කරන කූඹියෙක් එහි සෑම මාර්ගයක් ඔස්සේ ගමන් කරන අතර, එකම මගක දෙවරක් ගමන් නොකරයි. කූඹියා නැවත ආරම්භක ස්ථානයට ඒමට දරන උත්සාහය,",
+        "options": [
+            "සම්පූර්ණයෙන්ම සාර්ථක වේ.",
+            "අර්ධ වශයෙන් සාර්ථක වේ.",
+            "අසාර්ථක වේ."
+        ],
+        "answer": 2,
+        "hasImage": true,
+        "image": "images/q11.png"
+    },
+    {
+        "id": 12,
+        "text": "2026 වර්ෂයේ ජනවාරි මාසයේ පළමුවන දවස සහ දෙසැම්බර් 31 අවසන් දවස බ්‍රහස්පතින්දා වේ. මෙම වර්ෂයේ හරි මැද දිනය වන ජූලි මාසයේ දෙවන දිනය කුමන දවසක් ද?",
+        "options": [
+            "බ්‍රහස්පතින්දා ය.",
+            "සඳුදා ය.",
+            "බදාදා ය."
+        ],
+        "answer": 0,
+        "hasImage": false
+    },
+    {
+        "id": 13,
+        "text": "මිනිඡ් උපන්නේ තරුක උපදීමට වසරකට පෙර ය. අමාලි උපදී වසර දෙකකට පසු මිනිඡ් උපන්නා ය. ඒ අනුව වයසින් වැඩි ම හා අඩු ම දෙදෙනා පිළිවෙළින්,",
+        "options": [
+            "අමාලි සහ මිනිඡ් ය.",
+            "අමාලි සහ තරුක ය.",
+            "තරුක සහ මිනිඡ් ය."
+        ],
+        "answer": 1,
+        "hasImage": false
+    },
+    {
+        "id": 14,
+        "text": "සමාන සමචතුරස්‍ර පහකින් යුක්තව ඇඳ ඇති පහත රූපයේ වටේ මුළු දිග, එක් සමචතුරස්‍රයක වටේ දිග මෙන්,",
+        "options": [
+            "දෙගුණයකි.",
+            "තුන් ගුණයකි.",
+            "හතර ගුණයකි."
+        ],
+        "answer": 1,
+        "hasImage": true,
+        "image": "images/q14.png"
+    },
+    {
+        "id": 15,
+        "text": "රූපයේ දැක්වෙන සමචතුරස්‍රාකාර කොටු ජාලයේ සමන් A සිට B තෙක් ගමන් කරන අතර P සිට Q තෙක් පවන් ගමන් කරයි. සමන් ගමන් කළ දුර, පවන් ගමන් කළ දුරට,",
+        "options": [
+            "සමාන ය.",
+            "වඩා වැඩි ය.",
+            "වඩා අඩු ය."
+        ],
+        "answer": 0,
+        "hasImage": true,
+        "image": "images/q15.png"
+    },
+    {
+        "id": 16,
+        "text": "රූපය තුළ ඇති ත්‍රිකෝණ සහ චතුරස්‍ර ගණන පිළිවෙළින්,",
+        "options": [
+            "ත්‍රිකෝණ 01 , චතුරස්‍ර 01",
+            "ත්‍රිකෝණ 02 , චතුරස්‍ර 01",
+            "ත්‍රිකෝණ 03 , චතුරස්‍ර 03"
+        ],
+        "answer": 2,
+        "hasImage": true,
+        "image": "images/q16.png"
+    },
+    {
+        "id": 17,
+        "text": "රුපියල් 400 ක් තිබෙන කවිඳුට A හා B වෙළෙඳසැල දෙකක් අතුරින් A වෙළෙඳසැලෙන් එකම වර්ගයේ පොත් පහක් මිලට ගත් විට රුපියල් 20 ක් ඉතිරි වේ. B වෙළෙඳසැලෙන් එම වර්ගයේ ම පොත් පහක් මිලට ගත් විට රුපියල් 20 ක් මදි වේ. එම වෙළෙඳසැල් දෙකේ ඇති පොතක මිල පිළිවෙළින්,",
+        "options": [
+            "රුපියල් 76 සහ රුපියල් 78",
+            "රුපියල් 78 සහ රුපියල් 82",
+            "රුපියල් 76 සහ රුපියල් 84"
+        ],
+        "answer": 2,
+        "hasImage": false
+    },
+    {
+        "id": 18,
+        "text": "මිදුලේ ඇඳ ඇති සමචතුරස්‍රාකාර රූපයේ ශීර්ෂ හතරෙහි A, B, C සහ D සිසුන් හතර දෙනා සිටින්නේ A ට නැගෙනහිර දිශාවෙන් C ද B ට උතුරු දිශාවෙන් D ද වන පරිදි ය. ඒ අනුව A සහ C සිසුන් දෙදෙනා සිටින්නේ B හා D සිසුන් දෙදෙනාට පිළිවෙළින් කුමන දිශාවල ද?",
+        "options": [
+            "ගිනිකොණ සහ නිරිත",
+            "වයඹ සහ ගිනිකොණ",
+            "වයඹ සහ ඊසාන"
+        ],
+        "answer": 2,
+        "hasImage": true,
+        "image": "images/q18.png"
+    },
+    {
+        "id": 19,
+        "text": "සමතල මතුපිටක ඇඳ ඇති රූපයේ දැක්වෙන වෘත්තාකාර හැඩය මත සුදු, රතු, කහ යන අනුපිළිවෙළින් බෝල 9 ක් තබා ඇත. ක්‍රීඩාවක යෙදෙන කුමලි ඊතලය ඇති දිශාවට දක්ෂිණාවර්තව සුදු පාට බෝලයෙන් පටන් ගෙන 1,2,3,4,5 යනුවෙන් ගණන් කර පස්වන රතු පාට බෝලය ඉවත් කරයි. ඉන් පසු ඊළඟ කහ පාට බෝලයෙන් පටන්ගෙන දක්ෂිණාවර්තව 1,2,3,4,5 යනුවෙන් ගණන් කර පස්වන සුදු පාට බෝලය ඉවත් කරයි. මෙම ක්‍රීඩාව දිගට ම සිදුවේ නම් ඉතිරි වන බෝල දෙකෙහි වර්ණය කුමක් ද?",
+        "options": [
+            "රතු පාට",
+            "සුදු පාට",
+            "කහ පාට"
+        ],
+        "answer": 0,
+        "hasImage": true,
+        "image": "images/q19.png"
+    },
+    {
+        "id": 20,
+        "text": "පන්තියක සිටින සිසුන් 40 කින් පිරිමි ළමුන් සංඛ්‍යාව හතර දෙනා බැගින් කණ්ඩායම්ගත වූ විට සිටින කණ්ඩායම් ගණනට වඩා ගැහැණු ළමුන් සංඛ්‍යාව හතර දෙනා බැගින් කණ්ඩායම්ගත වූ විට සිටින කණ්ඩායම් ගණන දෙකකින් වැඩි ය. ඒ අනුව පන්තියේ සිටින පිරිමි ළමුන් සහ ගැහැණු ළමුන් සංඛ්‍යාව පිළිවෙළින්,",
+        "options": [
+            "පිරිමි 24 ගැහැණු 16",
+            "පිරිමි 20 ගැහැණු 20",
+            "පිරිමි 16 ගැහැණු 24"
+        ],
+        "answer": 2,
+        "hasImage": false
+    },
+    {
+        "id": 21,
+        "text": "ඝනකාකාර හැඩැති සමාන ලී කුට්ටි යොදාගෙන සකස් කළ මෙම ඝන වස්තුවේ ලී කුට්ටි කීයක් තිබේ ද?",
+        "options": [
+            "44 කි.",
+            "48 කි.",
+            "52 කි."
+        ],
+        "answer": 1,
+        "hasImage": true,
+        "image": "images/q21.png"
+    },
+    {
+        "id": 22,
+        "text": "දාදු කැටයක් උඩ දමා වැටුණු අවස්ථා තුනක් පහත දැක්වේ. එම අවස්ථා තුනෙහි දාදු කැටය මේසය මත ස්පර්ශ වී ඇති මුහුණත්වල සඳහන් අංක පිළිවෙළින්,",
+        "options": [
+            "1, 2 සහ 5",
+            "1, 4 සහ 5",
+            "1, 5 සහ 2"
+        ],
+        "answer": 1,
+        "hasImage": true,
+        "image": "images/q22.png"
+    },
+    {
+        "id": 23,
+        "text": "වැඩි ම ප්‍රදේශයක් අඳුරු වී ඇති රූපය කුමක් ද?",
+        "options": [
+            "(1) රූපය",
+            "(2) රූපය",
+            "(3) රූපය"
+        ],
+        "answer": 2,
+        "hasImage": true,
+        "image": "images/q23.png"
+    },
+    {
+        "id": 24,
+        "text": "පහත දැක්වෙන්නේ සියුම්කාගේ දිනචරියාව පිළිබඳ සිදුවීම් කිහිපයකි.\\nA. යහළුවන් සමග සෙල්ලම් කළා.\\nB. නෑමෙන් පසු පාසලේ ගණිතය පැවැරුම් කළා.\\nC. දිවා ආහාර පාන ලබාගෙන විවේක ගත්තා.\\nD. දෙමාපියන්ට වැඳ නිදන්නට ගියා.\\nE. පාසලේ වැඩ අවසන් කර නිවසට පැමිණියා.\\n\\nඒ අනුව වඩාත් ගැලපෙන නිවැරදි අනුපිළිවෙල කුමක් ද?",
+        "options": [
+            "E, B, C, A, D",
+            "E, C, A, B, D",
+            "E, C, B, A, D"
+        ],
+        "answer": 2,
+        "hasImage": false
+    },
+    {
+        "id": 25,
+        "text": "රූපයේ සිටින සිසුන් සිවු දෙනා අතුරෙන් දෙදෙනෙක් උතුරු දිශාවට මුහුණ ලා සිටින අතර, ඉතිරි දෙදෙනා දකුණු දිශාවට මුහුණ ලා අත් අල්ලාගෙන සිටිති. ඔවුන් අතුරින් එකිනෙකා ළඟ සිටින දෙදෙනෙකු ඔවුන්ගේ සමාන අත් අල්ලාගෙන සිටිය හැකි උපරිම අවස්ථා ගණන කීය ද?",
+        "options": [
+            "එකකි.",
+            "දෙකකි.",
+            "තුනකි."
+        ],
+        "answer": 1,
+        "hasImage": true,
+        "image": "images/q25.png"
+    },
+    {
+        "id": 26,
+        "text": "P + S = 320 ද, Q + R = 230 ද, Q = 30 ද වේ. ඒ අනුව P + Q + S - R හි අගය කීය ද?",
+        "options": [
+            "200",
+            "150",
+            "550"
+        ],
+        "answer": 1,
+        "hasImage": false
+    },
+    {
+        "id": 27,
+        "text": "රුපියල, රුපියල් 2, රුපියල් 5 සහ රුපියල් 10 කාසි පමණක් තිබෙන කැටයක රුපියල් දහයේ කාසි මෙන් දෙගුණයක් රුපියල් පහේ කාසි ද රුපියල් පහේ කාසි මෙන් තුන් ගුණයක් රුපියල් දෙකේ කාසි ද රුපියල් දෙකේ කාසිවලින් හරි අඩක් (බාගයක්) රුපියලේ කාසි ද ඇත. කැටයේ රුපියලේ කාසි 12 ක් පමණක් තිබේ නම් එහි ඇති මුළු මුදල කීය ද?",
+        "options": [
+            "රුපියල් 128",
+            "රුපියල් 140",
+            "රුපියල් 168"
+        ],
+        "answer": 1,
+        "hasImage": false
+    },
+    {
+        "id": 28,
+        "text": "එකම වර්ගයේ සමාන චතුස්තල හතරක මුහුණත්වල 1 සිට 4 තෙක් අංක ලියා මේසයක් මත තබා ඇත. මේසය මත ස්පර්ශ වූ මුහුණත්වල ලියා ඇති සංඛ්‍යා දෙකක වෙනස වැඩි ම අගය ලැබෙන චතුස්තල දෙකට අයත් අක්‍ෂර මොනවා ද?",
+        "options": [
+            "A හා B",
+            "B හා C",
+            "C හා D"
+        ],
+        "answer": 0,
+        "hasImage": true,
+        "image": "images/q28.png"
+    },
+    {
+        "id": 29,
+        "text": "වාහනවලට ඉන්ධන ලබා දෙන්නේ අංක තහඩුවේ සඳහන් අංකයේ අවසන් ඉලක්කම 1, 3, 5, 7 හෝ 9 වන ඔත්තේ සංඛ්‍යාවලින් එකක් නම් ඔත්තේ දිනවල ද අවසන් ඉලක්කම 0, 2, 4, 6 හෝ 8 වන ඉරට්ටේ සංඛ්‍යාවලින් එකක් නම් ඉරට්ටේ දිනවල ද වශයෙනි. කපිල මහතාගේ යතුරුපැදියේ සඳහන් අංකයේ අග ඉලක්කම බින්දුව වේ. ඔහු අප්‍රේල් මාසයේ දෙවන දින තම යතුරුපැදියට ඉන්ධන ලබාගත් අතර ඉන්පසු නොකඩවා අප්‍රේල් මාසය පුරා ඇති සියලු ඉරට්ටේ දිනවල ඉන්ධන ලබාගත්තේ නම් ඔහු අප්‍රේල් මාසය අවසන් වන විට ඉන්ධන ලබාගත් මුළු දින ගණන කීය ද?",
+        "options": [
+            "15 කි.",
+            "8 කි.",
+            "30 කි."
+        ],
+        "answer": 0,
+        "hasImage": false
+    },
+    {
+        "id": 30,
+        "text": "පහත රටාව අනුව ? ඇති තැනට ආ යුතු රූපය කුමක් ද?",
+        "options": [
+            "(1) රූපය",
+            "(2) රූපය",
+            "(3) රූපය"
+        ],
+        "answer": 0,
+        "hasImage": true,
+        "image": "images/q30.png"
+    },
+    {
+        "id": 31,
+        "text": "පොත් කියවීම, ඇවිදීම සහ මුද්දර එකතු කිරීම යන විනෝදාංශ තුන අතුරෙන් අරුණි, ඇවිදීම හැර ඉතිරි විනෝදාංශ දෙකට කැමති ය. ෆාතිමා, මුද්දර එකතු කිරීම හැර ඉතිරි විනෝදාංශ දෙකට කැමති ය. රාධන්, පොත් කියවීම හැර ඉතිරි විනෝදාංශ දෙකට කැමති ය. ඒ අනුව විනෝදාංශ දෙකකට පමණක් කැමති සිසුන් සංඛ්‍යාව,",
+        "options": [
+            "03",
+            "02",
+            "01"
+        ],
+        "answer": 0,
+        "hasImage": false
+    },
+    {
+        "id": 32,
+        "text": "සෙන්ටිමීටර 16 ක් දිග කම්බියකින් 1/4 කොටසක් කපා ඉවත් කරන ලදී. ඉතිරි කම්බි කැබැල්ල සම්පූර්ණයෙන් ම යොදාගෙන සමචතුරස්‍රාකාර කම්බි රාමුවක් සකස් කරන ලදී. එහි පැත්තක දිග කීය ද?",
+        "options": [
+            "1 cm කි.",
+            "2 cm කි.",
+            "3 cm කි."
+        ],
+        "answer": 2,
+        "hasImage": false
+    },
+    {
+        "id": 33,
+        "text": "වෙළෙන්දෙක් රුපියල් 100 ට අඹ ගෙඩි හතර බැගින් මිලට ගෙන රුපියල් 200 ට අඹ ගෙඩි පහ බැගින් විකුණයි. එක්තරා දිනයක ඔහුට මෙම වෙළඳාමෙන් රුපියල් 1500 ක ලාභයක් ලැබුණේ නම් එදින ඔහු විකුණන ලද අඹ ගෙඩි ගණන කීය ද?",
+        "options": [
+            "100",
+            "200",
+            "300"
+        ],
+        "answer": 0,
+        "hasImage": false
+    },
+    {
+        "id": 34,
+        "text": "ඔරලෝසු මුහුණතක මතුපිට i සිට xii තෙක් රෝම සංඛ්‍යා ලියා ඇත. ඒ අනුව i දක්වන සංඛ්‍යාකය එක ළඟ වාර දෙකක් හෝ කිහිපයක් යෙදී ඇති අවස්ථා ගණන කීය ද?",
+        "options": [
+            "තුනකි.",
+            "හතරකි.",
+            "පහකි."
+        ],
+        "answer": 2,
+        "hasImage": true,
+        "image": "images/q34.png"
+    },
+    {
+        "id": 35,
+        "text": "නරිද A සිට B තෙක් ගමන් කළ මාර්ග සටහනක් පහත දැක්වේ. ඒ අනුව ඔහු තම වම් අත පැත්තට හැරී ගමන් කළ වාර ගණන දකුණු අත පැත්තට හැරී ගමන් කළ වාර ගණනට,",
+        "options": [
+            "සමාන ය.",
+            "වඩා අඩු ය.",
+            "වඩා වැඩි ය."
+        ],
+        "answer": 0,
+        "hasImage": true,
+        "image": "images/q35.png"
+    },
+    {
+        "id": 36,
+        "text": "A, B සහ C තිදෙනා ළඟ මුද්දර ඇත. B ළඟ ඇති මුද්දරවල දෙගුණයට වඩා මුද්දර 20 ක් අඩුවෙන් A ළඟ ද A ළඟ ඇති මුද්දරවල තුන්ගුණයට වඩා මුද්දර 20 ක් වැඩියෙන් C ළඟ ද මුද්දර ඇත. C ළඟ ඇති මුද්දර සංඛ්‍යාව 200 නම් A හා B දෙදෙනා ළඟ ඇති මුද්දර ගණන පිළිවෙළින්,",
+        "options": [
+            "60 සහ 80",
+            "60 සහ 40",
+            "40 සහ 100"
+        ],
+        "answer": 1,
+        "hasImage": false
+    },
+    {
+        "id": 37,
+        "text": "රූපයේ දැක්වෙන සීනු තුන අතුරෙන්,\\n* ඉහත පළමු සීනුව මිනිත්තු 30 කට වරක් ද\\n* දෙවන සීනුව පැයකට වරක් ද\\n* තෙවන සීනුව පැය එකහමාරකට වරක් ද නාද වෙයි.\\n\\nසීනු තුන ම පෙ.ව. 7.30 ට එකවර නාද වීමෙන් පසු ඒවා නැවත එකවර නාද වන ආසන්නතම වේලාව කීයද?",
+        "options": [
+            "පෙ.ව. 8.30",
+            "පෙ.ව. 9.30",
+            "පෙ.ව. 10.30"
+        ],
+        "answer": 2,
+        "hasImage": true,
+        "image": "images/q37.png"
+    },
+    {
+        "id": 38,
+        "text": "ඉලක්කම් තුනේ සංඛ්‍යාවක් පිළිබඳ ප්‍රකාශන දෙකක් පහත දැක්වේ.\\n* පළමුවන ඉලක්කමේ අගය දෙවන ඉලක්කමේ අගය මෙන් දෙගුණයකි.\\n* තුන්වන ඉලක්කමේ අගය පළමුවන ඉලක්කමේ අගය මෙන් තුන් ගුණයකි.\\n\\nඒ අනුව තුන්වන ඉලක්කමේ අගය, පළමුවන සහ දෙවන ඉලක්කම් දෙකේ එකතුව මෙන්,",
+        "options": [
+            "දෙගුණයකි.",
+            "තුන්ගුණයකි.",
+            "හතර ගුණයකි."
+        ],
+        "answer": 0,
+        "hasImage": false
+    },
+    {
+        "id": 39,
+        "text": "විහඟ, තනුජි, ඇලී, ෆාතිමා සහ නෙත්මි යන යහළුවන් පස්දෙනා එකිනෙකා අතර සුබ පැතුම් පත් හුවමාරු කර ගනිති. ඒ අනුව ඔවුන් සියලු දෙනා ම හුවමාරු කර ගත් මුළු සුබ පැතුම් පත් ගණන කීය ද?",
+        "options": [
+            "10 කි.",
+            "20 කි.",
+            "30 කි."
+        ],
+        "answer": 1,
+        "hasImage": false
+    },
+    {
+        "id": 40,
+        "text": "පහත දැක්වෙන A රූපයේ සමචතුරස්‍රය තුළ ඇති අංක 1 සිට 8 තෙක් විවිධ හැඩ අටක් අතුරින් හැඩ හයක් පමණක් යොදාගෙන B රූපය නිර්මාණය කර ඇත. ඒ අනුව B රූපය නිර්මාණය කිරීමට A රූපය තුළ ඇති හැඩ අතුරින් යොදා නොගත් හැඩ දෙකෙහි අංක මොනවාද?",
+        "options": [
+            "2 සහ 5",
+            "1 සහ 2",
+            "6 සහ 8"
+        ],
+        "answer": 2,
+        "hasImage": true,
+        "image": "images/q40.png"
+    }
+];
+
+        let currentQuestion = 0;
+        let score = 0;
+        let userAnswers = [];
+
+        // Audio Effects (Web Audio API)
+        function playSound(type) {
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+
+                if (type === 'correct') {
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(523.25, ctx.currentTime); // C5
+                    osc.frequency.setValueAtTime(659.25, ctx.currentTime + 0.1); // E5
+                    gain.gain.setValueAtTime(0.2, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.3);
+                    osc.start();
+                    osc.stop(ctx.currentTime + 0.3);
+                } else if (type === 'wrong') {
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(220, ctx.currentTime); // A3
+                    osc.frequency.setValueAtTime(174.61, ctx.currentTime + 0.15); // F3
+                    gain.gain.setValueAtTime(0.2, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.35);
+                    osc.start();
+                    osc.stop(ctx.currentTime + 0.35);
+                }
+            } catch (e) {
+                // Audio context not supported
+            }
+        }
+
+        function startQuiz() {
+            document.getElementById('startScreen').classList.add('hidden');
+            document.getElementById('progressArea').classList.remove('hidden');
+            document.getElementById('quizCard').classList.remove('hidden');
+            currentQuestion = 0;
+            score = 0;
+            userAnswers = new Array(questions.length).fill(undefined);
+            renderQuestion();
+        }
+
+        function renderQuestion() {
+            const q = questions[currentQuestion];
+            document.getElementById('questionText').textContent = q.id + '. ' + q.text;
+            document.getElementById('questionCounter').textContent = 'ප්‍රශ්නය ' + (currentQuestion + 1) + ' / ' + questions.length;
+            document.getElementById('scoreTracker').textContent = 'ලකුණු: ' + score;
+
+            const pct = ((currentQuestion + 1) / questions.length) * 100;
+            document.getElementById('progressBar').style.width = pct + '%';
+
+            // Handle Image
+            const imgBox = document.getElementById('imageContainer');
+            const img = document.getElementById('questionImage');
+            if (q.hasImage && q.image) {
+                img.src = q.image;
+                imgBox.classList.remove('hidden');
+            } else {
+                imgBox.classList.add('hidden');
+                img.src = '';
+            }
+
+            // Handle Options
+            const optionsContainer = document.getElementById('optionsContainer');
+            optionsContainer.innerHTML = '';
+            const letters = ['අ', 'ආ', 'ඇ'];
+
+            q.options.forEach((optText, idx) => {
+                const div = document.createElement('div');
+                div.className = 'option-item';
+                div.innerHTML = '<div class="option-badge">' + letters[idx] + '</div><span>' + optText + '</span>';
+                div.onclick = () => selectOption(idx);
+                optionsContainer.appendChild(div);
+            });
+
+            const feedback = document.getElementById('feedback');
+            const nextBtn = document.getElementById('nextBtn');
+
+            // Restore answered state if user navigated back
+            if (userAnswers[currentQuestion] !== undefined) {
+                const selected = userAnswers[currentQuestion];
+                const options = optionsContainer.querySelectorAll('.option-item');
+
+                options.forEach((opt, idx) => {
+                    opt.classList.add('disabled');
+                    if (idx === q.answer) opt.classList.add('correct');
+                    if (idx === selected && selected !== q.answer) opt.classList.add('wrong');
+                    if (idx !== selected && idx !== q.answer) opt.classList.add('dim');
+                });
+
+                if (selected === q.answer) {
+                    feedback.className = 'feedback-box correct';
+                    feedback.textContent = '✅ නිවැරදියි! සුපිරි!';
+                } else {
+                    feedback.className = 'feedback-box wrong';
+                    feedback.textContent = '❌ වැරදියි. නිවැරදි පිළිතුර: (' + letters[q.answer] + ') ' + q.options[q.answer];
+                }
+                nextBtn.disabled = false;
+            } else {
+                feedback.className = 'feedback-box';
+                feedback.textContent = '';
+                nextBtn.disabled = true;
+            }
+
+            // Update nav buttons
+            document.getElementById('prevBtn').disabled = currentQuestion === 0;
+            if (currentQuestion === questions.length - 1) {
+                nextBtn.textContent = '🏁 අවසන් කරන්න';
+            } else {
+                nextBtn.textContent = 'ඊළඟ ▶';
+            }
+        }
+
+        function selectOption(index) {
+            if (userAnswers[currentQuestion] !== undefined) return;
+
+            userAnswers[currentQuestion] = index;
+            const q = questions[currentQuestion];
+            const letters = ['අ', 'ආ', 'ඇ'];
+            const options = document.getElementById('optionsContainer').querySelectorAll('.option-item');
+            const feedback = document.getElementById('feedback');
+
+            options.forEach((opt, idx) => {
+                opt.classList.add('disabled');
+                if (idx === q.answer) opt.classList.add('correct');
+                if (idx === index && index !== q.answer) opt.classList.add('wrong');
+                if (idx !== index && idx !== q.answer) opt.classList.add('dim');
+            });
+
+            if (index === q.answer) {
+                score++;
+                playSound('correct');
+                feedback.className = 'feedback-box correct';
+                feedback.textContent = '✅ නිවැරදියි! සුපිරි!';
+            } else {
+                playSound('wrong');
+                feedback.className = 'feedback-box wrong';
+                feedback.textContent = '❌ වැරදියි. නිවැරදි පිළිතුර: (' + letters[q.answer] + ') ' + q.options[q.answer];
+            }
+
+            document.getElementById('scoreTracker').textContent = 'ලකුණු: ' + score;
+            document.getElementById('nextBtn').disabled = false;
+        }
+
+        function nextQuestion() {
+            if (userAnswers[currentQuestion] === undefined) return;
+
+            if (currentQuestion === questions.length - 1) {
+                showResults();
+                return;
+            }
+
+            currentQuestion++;
+            renderQuestion();
+        }
+
+        function prevQuestion() {
+            if (currentQuestion === 0) return;
+            currentQuestion--;
+            renderQuestion();
+        }
+
+        function showResults() {
+            document.getElementById('quizCard').classList.add('hidden');
+            document.getElementById('progressArea').classList.add('hidden');
+            document.getElementById('resultCard').classList.remove('hidden');
+
+            const total = questions.length;
+            const pct = Math.round((score / total) * 100);
+
+            document.getElementById('scoreCircle').style.setProperty('--pct', pct);
+            document.getElementById('scoreNum').textContent = score + '/' + total;
+            document.getElementById('scorePct').textContent = pct + '%';
+
+            let stars, msg, sub;
+            if (pct >= 80) {
+                stars = '🌟🌟🌟';
+                msg = 'අපූරුයි! ඔබ දක්ෂයි! 🏆';
+                sub = 'ඔබ ඉතා හොඳින් ප්‍රශ්නාවලියට පිළිතුරු සපයා ඇත. ජය වේවා!';
+            } else if (pct >= 60) {
+                stars = '🌟🌟';
+                msg = 'ඉතා හොඳයි! 👏';
+                sub = 'තවත් පුරුදු වීමෙන් ඔබට 100% ක්ම ලබා ගත හැක.';
+            } else if (pct >= 40) {
+                stars = '🌟';
+                msg = 'හොඳ උත්සාහයක්! 💪';
+                sub = 'වැරදුනු ප්‍රශ්න නැවත බලා අධ්‍යයනය කරන්න.';
+            } else {
+                stars = '📚';
+                msg = 'තව පුහුණු වෙමු! 😊';
+                sub = 'නැවත ප්‍රශ්නාවලිය කර වඩා හොඳ ලකුණක් ලබා ගන්න.';
+            }
+
+            document.getElementById('resultStars').textContent = stars;
+            document.getElementById('resultMsg').textContent = msg;
+            document.getElementById('resultSub').textContent = sub;
+
+            renderReviewList('all');
+        }
+
+        function renderReviewList(filter) {
+            const list = document.getElementById('reviewList');
+            list.innerHTML = '';
+            const letters = ['අ', 'ආ', 'ඇ'];
+
+            questions.forEach((q, idx) => {
+                const userAns = userAnswers[idx];
+                const isCorrect = userAns === q.answer;
+
+                if (filter === 'correct' && !isCorrect) return;
+                if (filter === 'wrong' && isCorrect) return;
+
+                const item = document.createElement('div');
+                item.className = 'review-item' + (isCorrect ? '' : ' wrong');
+
+                let imgHtml = '';
+                if (q.hasImage && q.image) {
+                    imgHtml = '<div class="review-img"><img src="' + q.image + '" alt="රූපය"></div>';
+                }
+
+                let userAnsText = userAns !== undefined ? '(' + letters[userAns] + ') ' + q.options[userAns] : 'පිළිතුරු දී නැත';
+                let correctAnsText = '(' + letters[q.answer] + ') ' + q.options[q.answer];
+
+                item.innerHTML = '<div class="review-q-num">' +
+                        '<span>ප්‍රශ්නය ' + q.id + '</span>' +
+                        '<span>' + (isCorrect ? '✅ නිවැරදියි' : '❌ වැරදියි') + '</span>' +
+                    '</div>' +
+                    '<div class="review-q-text">' + q.text + '</div>' +
+                    imgHtml +
+                    '<div class="review-ans ' + (isCorrect ? 'correct-text' : 'wrong-text') + '">' +
+                        'ඔබේ පිළිතුර: ' + userAnsText +
+                    '</div>' +
+                    (!isCorrect ? '<div class="review-ans correct-text">නිවැරදි පිළිතුර: ' + correctAnsText + '</div>' : '');
+                list.appendChild(item);
+            });
+        }
+
+        function filterReview(filter, evt) {
+            document.querySelectorAll('.btn-filter').forEach(btn => btn.classList.remove('active'));
+            if (evt && evt.target) {
+                evt.target.classList.add('active');
+            }
+            renderReviewList(filter);
+        }
+
+        function restartQuiz() {
+            document.getElementById('resultCard').classList.add('hidden');
+            document.getElementById('startScreen').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
